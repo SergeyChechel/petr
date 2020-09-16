@@ -1,6 +1,7 @@
 // 'use strict';
 let money, 
     time,
+    str1,
     appData;
 
 function start() {
@@ -20,12 +21,10 @@ function detectDayBudget() {
         timeData: time,
         expenses: {},
         optionalExpenses: chooseOptExpenses(),
-        income: [],
+        income: chooseIncome(),
         savings: true
     }    
-
     appData.moneyPerDay = (appData.budget/30).toFixed(2);
-    alert('Ваш бюджет на 1 день составляет ' + appData.moneyPerDay + ' гривен');
 }
 
 function detectLevel(summ) {
@@ -58,15 +57,45 @@ function chooseOptExpenses() {
     return optExpenses; 
 }
 
+function chooseIncome() {
+    
+    let addIncome = [];
+    let b;
+    do {
+        let a = prompt('Укажите источник дополнительного дохода?', '');
+        while(!isNaN(a) || a == '' || a == null) {
+            alert('В поле ввода допускаются только строковые данные');
+            a = prompt('Источник дополнительного дохода?', '');
+        }
+        b = prompt('У вас есть еще доп. доход (y/n) ?', '');
+        while (!((b == 'y') || (b == 'n'))) {
+            alert('В поле ввода допускаются только y - да или n - нет');
+            b = prompt('У вас есть еще доп. доход (y/n) ?', '');
+        }
+    addIncome.push(a);
+    } while (b != 'n');
+    let str = "Способы доп. заработка: \n";
+    addIncome.forEach(function(el, i) {
+        str += (++i + ': ' + el + '\n')
+    });
+    alert(str);
+    return addIncome; 
+}
+
 function checkSavings() {
     if(appData.savings == true) {
         let save = +prompt('Какова сумма накоплений?'),
             percent = +prompt('Под какой % ?');
         appData.monthIncome = save/100/12*parseInt(percent);
         alert('Доход в месяц с вашего депозита: ' + appData.monthIncome);
-
     }
 }
 
 start();
 checkSavings();
+alert('Ваш бюджет на 1 день составляет ' + appData.moneyPerDay + appData.monthIncome/30 + ' гривен');
+str1 = "Наша программа включает в себя данные: \n";
+for(key in appData) {
+    str1 += (key + ': ' + appData[key] + '\n');
+}
+console.log(str1);
