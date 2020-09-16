@@ -16,7 +16,7 @@ function detectDayBudget() {
         }
 
     appData.moneyPerDay = (appData.budget/30).toFixed(2);
-    alert('Ваш бюджет на 1 день составляет ' + appData.moneyPerDay + 'гривен');
+    alert('Ваш бюджет на 1 день составляет ' + appData.moneyPerDay + ' гривен');
 }
 
 function detectLevel(summ) {
