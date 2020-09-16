@@ -1,19 +1,28 @@
 // 'use strict';
+let money, 
+    time,
+    appData;
+
+function start() {
+    money = +prompt('Ваш бюджет на месяц?');
+    while(isNaN(money) || money == '' || money == null) {
+        alert('сумма бюджета обязательна к заполению только числом')
+        money = +prompt('Ваш бюджет на месяц?');
+    }
+    time = prompt('Введите дату в формате YYYY-MM-DD');
+    detectDayBudget();
+}
+
 
 function detectDayBudget() {
-    let money, time;
-
-        money = +prompt('Ваш бюджет на месяц?');
-        time = prompt('Введите дату в формате YYYY-MM-DD');
-            
-        let appData = {
-            budget: money,
-            timeData: time,
-            expenses: {},
-            optionalExpenses: chooseOptExpenses(),
-            income: [],
-            savings: false 
-        }
+    appData = {
+        budget: money,
+        timeData: time,
+        expenses: {},
+        optionalExpenses: chooseOptExpenses(),
+        income: [],
+        savings: true
+    }    
 
     appData.moneyPerDay = (appData.budget/30).toFixed(2);
     alert('Ваш бюджет на 1 день составляет ' + appData.moneyPerDay + ' гривен');
@@ -42,12 +51,22 @@ function chooseOptExpenses() {
                 optExpenses[i] = a;
         } 
         else {
-            alert('Вы ввели данные в неверном формате, повторите ввод')
+            alert('Вы ввели данные в неверном формате, повторите ввод');
             i -= 1;
-            continue;
         }
     }
     return optExpenses; 
 }
 
-detectDayBudget();
+function checkSavings() {
+    if(appData.savings == true) {
+        let save = +prompt('Какова сумма накоплений?'),
+            percent = +prompt('Под какой % ?');
+        appData.monthIncome = save/100/12*parseInt(percent);
+        alert('Доход в месяц с вашего депозита: ' + appData.monthIncome);
+
+    }
+}
+
+start();
+checkSavings();
