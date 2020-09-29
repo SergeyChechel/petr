@@ -203,8 +203,17 @@ window.addEventListener('DOMContentLoaded', () => {
     //         })
     //     })
 
-    getResource('http://localhost:3000/menu')
-        .then(data => createCard(data)); 
+    // getResource('http://localhost:3000/menu')
+    //     .then(data => createCard(data)); 
+
+    axios.get('http://localhost:3000/menu')
+        .then(data => {
+            data.data.forEach(({img, title, descr, price}) => {
+                new Card(img, title, descr, price).renderCard();
+
+            })
+        })
+    
 
     function createCard(data) {
         data.forEach(({img, title, descr, price}) => {
@@ -231,7 +240,7 @@ window.addEventListener('DOMContentLoaded', () => {
         failure: 'Что-то пошло не так...',
     }
     
-    
+    // Forms
     const forms = document.querySelectorAll('form');
 
     forms.forEach(item => bindPostData(item));
@@ -310,9 +319,122 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     }
 
-    fetch('http://localhost:3000/menu')
-        .then(data => data.json())
-        .then(res => console.log(res))
+    // fetch('http://localhost:3000/menu')
+    //     .then(data => data.json())
+    //     .then(res => console.log(res))
+
+
+    // Slider
+
+    /*const slides = document.querySelectorAll('.offer__slide');
+    const sliderCounter = document.querySelector('.offer__slider-counter');
+    const _num = document.querySelector('#current');
+    const total = document.querySelector('#total');
+
+    sliderCounter.addEventListener('click', (event) => {
+        if (event.target.classList.contains('offer__slider-prev') || 
+            event.target.getAttribute('alt') == 'prev') {
+                showSlide(changeIndex('PREV'));
+        }
+        if (event.target.classList.contains('offer__slider-next') || 
+            event.target.getAttribute('alt') == 'next') {
+                showSlide(changeIndex('NEXT'));
+        }
+    });
+    
+    function changeIndex(dir = null) {
+        const num = +_num.innerText;
+        let i = 0;
+        if (dir === 'PREV') {
+            if (num === 1) {
+                i = slides.length - 1;
+            } else {
+                i = num - 2;
+            }
+        }
+        if (dir === 'NEXT') {
+            if (num == slides.length) {
+                i = 0
+            } else {
+                i = num;
+            }
+        }
+        _num.innerText = addZero(i + 1);
+        
+        return i;
+    }
+
+    function addZero(n) {
+        let num = '';
+        return n < 10 ? num = '0' + n : num += n;
+    }
+
+    function showSlide(i = 0) {
+        total.innerText = addZero(slides.length);
+        for(j = 0; j < slides.length; j++) {
+            slides[j].classList.remove('active');
+        }
+        slides[i].classList.add('active');
+    }
+    
+    
+    showSlide();*/
+
+    const slides = document.querySelectorAll('.offer__slide')
+          prev = document.querySelector('.offer__slider-prev'),
+          next = document.querySelector('.offer__slider-next'),
+          total = document.querySelector('#total'),
+          current = document.querySelector('#current'),
+          slidesWrapper = document.querySelector('.offer__slider-wrapper'),
+          slidesField = document.querySelector('.offer__slider-inner'),
+          width = window.getComputedStyle(slidesWrapper).width;
+    
+    let slideIndex = 1;
+
+    slidesField.style.width = 100 * slides.length + '%';
+    slidesField.style.display = 'flex';
+    slidesField.style.transition = '1s all';
+    slidesWrapper.style.overflow = 'hidden';
+    slides.forEach(slide => slide.style.width = width);
+
+    // showSlides(slideIndex);
+
+    // if (slides.length < 10) {
+    //     total.textContent = `0${slides.length}`;
+    // } else {
+    //     total.textContent = `${slides.length}`;
+    // }
+
+    // function showSlides(n) {
+    //     if (n > slides.length) {
+    //         slideIndex = 1;
+    //     }
+    //     if (n < 1) {
+    //         slideIndex = slides.length;
+    //     }
+    //     slides.forEach(item => item.style.display = 'none');
+    //     slides[slideIndex - 1].style.display = 'block';
+
+    //     if (slides.length < 10) {
+    //         current.textContent = `0${slideIndex}`;
+    //     } else {
+    //         current.textContent = `${slideIndex}`;
+    //     }
+    // }
+
+    // function plusSlides(n) {
+    //     showSlides(slideIndex += n); 
+    // }
+
+    // prev.addEventListener('click', () => {
+    //     plusSlides(-1);
+    // });
+
+    // next.addEventListener('click', () => {
+    //     plusSlides(1);
+    // });
+    
+    
 
  
 });
