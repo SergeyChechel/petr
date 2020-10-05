@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 // console.log('Запрос данных...');
 
@@ -58,11 +58,13 @@ person.userAge = 30;
 console.log(person.userAge);
 
 class User {
+
+    #surname = 'Petrychenko';
+    
     constructor(name, age) {
         this.name = name;
         this._age = age;
     }
-    #surname = 'Petrychenko';
     say = () => {
         console.log(`Имя пользователя: ${this.name} ${this.#surname}, возраст ${this._age}`);
     }
@@ -79,13 +81,14 @@ class User {
     get surname() {
         return this.#surname;
     }
-    set surname(surname) {
-        this.#surname = surname;
+
+    set surname(sur) {
+        this.#surname = sur;
     }
 }
 
 const ivan = new User('Ivan', 27);
-console.log(ivan.age);
-console.log(ivan.surname);
 ivan.surname('Bobko');
-ivan.say();
+// console.log(ivan.age);
+// console.log(ivan.surname);
+// ivan.say();
