@@ -1,3 +1,7 @@
+import {getResource} from '../services/services';
+var Promise = require('es6-promise-polyfill').Promise;
+
+
 export function cards() {
 
     class Card {
@@ -42,13 +46,11 @@ export function cards() {
             `;
             
         }
-    
        
     }
 
-
-
         // create cards
+
 
     // getResource('http://localhost:3000/menu')
     //     .then(data => {

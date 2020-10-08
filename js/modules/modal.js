@@ -1,42 +1,41 @@
-export function closeModal() {
+export function closeModal(modalSelector) {
+    const modal = document.querySelector(modalSelector);
     modal.classList.toggle('show');
     modal.classList.remove('show');
     document.body.style.overflow = '';
 }
 
-export function openModal() {
+export function openModal(modalSelector) {
+    const modal = document.querySelector(modalSelector);
     modal.classList.toggle('show');
     document.body.style.overflow = 'hidden';
-    
 }
 
 
 
-export function modal() {
+export function modal(triggerSelector, modalSelector) {
 
     // modalWindow
 
-    const btns = document.querySelectorAll('button');
-    const modal = document.querySelector('.modal');
+    const modalTrigger = document.querySelectorAll(triggerSelector);
+    const modal = document.querySelector(modalSelector);
     
     
     
-    btns.forEach(btn => {
-        if (btn.hasAttribute('data-modal')) {
-            btn.addEventListener('click', openModal);
-        }
+    modalTrigger.forEach(btn => {
+        btn.addEventListener('click', () => openModal(modalSelector));
     });
 
     
     modal.addEventListener('click', (e) => {
         if(e.target === modal || e.target.getAttribute('data-close') == '') {
-            closeModal();
+            closeModal(modalSelector);
         }
     });
 
     document.addEventListener('keydown', (e) => {
         if(e.code == 'Escape' && modal.classList.contains('show')) {
-            closeModal();
+            closeModal(modalSelector);
         }
     });
 
@@ -44,7 +43,7 @@ export function modal() {
 
     function showModalByScroll() {
         if(window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
-                openModal();
+                openModal(modalSelector);
                 window.removeEventListener('scroll', showModalByScroll);
         }
     }
@@ -52,14 +51,6 @@ export function modal() {
     window.addEventListener('scroll', showModalByScroll);
 
 
-    const getResource = async (url) => {
-        const res = await fetch(url);
-
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${url}, status: ${res.status}`);
-        }
-        return await res.json();
-    };
-
+    
 }
 

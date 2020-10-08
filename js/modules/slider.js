@@ -1,73 +1,12 @@
-export function slider() {
+export function slider({slide, nextArrow, prevArrow, totalCounter, currentCounter, wrapper, field}) {
 
-    // fetch('http://localhost:3000/menu')
-    //     .then(data => data.json())
-    //     .then(res => console.log(res))
-
-
-    // Slider
-
-    /*const slides = document.querySelectorAll('.offer__slide');
-    const sliderCounter = document.querySelector('.offer__slider-counter');
-    const _num = document.querySelector('#current');
-    const total = document.querySelector('#total');
-
-    sliderCounter.addEventListener('click', (event) => {
-        if (event.target.classList.contains('offer__slider-prev') || 
-            event.target.getAttribute('alt') == 'prev') {
-                showSlide(changeIndex('PREV'));
-        }
-        if (event.target.classList.contains('offer__slider-next') || 
-            event.target.getAttribute('alt') == 'next') {
-                showSlide(changeIndex('NEXT'));
-        }
-    });
-    
-    function changeIndex(dir = null) {
-        const num = +_num.innerText;
-        let i = 0;
-        if (dir === 'PREV') {
-            if (num === 1) {
-                i = slides.length - 1;
-            } else {
-                i = num - 2;
-            }
-        }
-        if (dir === 'NEXT') {
-            if (num == slides.length) {
-                i = 0
-            } else {
-                i = num;
-            }
-        }
-        _num.innerText = addZero(i + 1);
-        
-        return i;
-    }
-
-    function addZero(n) {
-        let num = '';
-        return n < 10 ? num = '0' + n : num += n;
-    }
-
-    function showSlide(i = 0) {
-        total.innerText = addZero(slides.length);
-        for(j = 0; j < slides.length; j++) {
-            slides[j].classList.remove('active');
-        }
-        slides[i].classList.add('active');
-    }
-    
-    
-    showSlide();*/
-
-    const slides = document.querySelectorAll('.offer__slide'),
-          prev = document.querySelector('.offer__slider-prev'),
-          next = document.querySelector('.offer__slider-next'),
-          total = document.querySelector('#total'),
-          current = document.querySelector('#current'),
-          slidesWrapper = document.querySelector('.offer__slider-wrapper'),
-          slidesField = document.querySelector('.offer__slider-inner'),
+    const slides = document.querySelectorAll(slide),
+          prev = document.querySelector(prevArrow),
+          next = document.querySelector(nextArrow),
+          total = document.querySelector(totalCounter),
+          current = document.querySelector(currentCounter),
+          slidesWrapper = document.querySelector(wrapper),
+          slidesField = document.querySelector(field),
           width = window.getComputedStyle(slidesWrapper).width;
 
     let slideIndex = 1;
@@ -203,6 +142,68 @@ export function slider() {
         }
     }
 
+
+
+        // fetch('http://localhost:3000/menu')
+    //     .then(data => data.json())
+    //     .then(res => console.log(res))
+
+
+    // Slider
+
+    /*const slides = document.querySelectorAll('.offer__slide');
+    const sliderCounter = document.querySelector('.offer__slider-counter');
+    const _num = document.querySelector('#current');
+    const total = document.querySelector('#total');
+
+    sliderCounter.addEventListener('click', (event) => {
+        if (event.target.classList.contains('offer__slider-prev') || 
+            event.target.getAttribute('alt') == 'prev') {
+                showSlide(changeIndex('PREV'));
+        }
+        if (event.target.classList.contains('offer__slider-next') || 
+            event.target.getAttribute('alt') == 'next') {
+                showSlide(changeIndex('NEXT'));
+        }
+    });
+    
+    function changeIndex(dir = null) {
+        const num = +_num.innerText;
+        let i = 0;
+        if (dir === 'PREV') {
+            if (num === 1) {
+                i = slides.length - 1;
+            } else {
+                i = num - 2;
+            }
+        }
+        if (dir === 'NEXT') {
+            if (num == slides.length) {
+                i = 0
+            } else {
+                i = num;
+            }
+        }
+        _num.innerText = addZero(i + 1);
+        
+        return i;
+    }
+
+    function addZero(n) {
+        let num = '';
+        return n < 10 ? num = '0' + n : num += n;
+    }
+
+    function showSlide(i = 0) {
+        total.innerText = addZero(slides.length);
+        for(j = 0; j < slides.length; j++) {
+            slides[j].classList.remove('active');
+        }
+        slides[i].classList.add('active');
+    }
+    
+    
+    showSlide();*/
 
 }
 
